@@ -1,13 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { useAuth } from '../Context/authContext';
 import './Clock.scss';
 function Clock() {
-    const { isActive } = useAuth();
     const secondHandle = useRef(null);
     const minuteHandle = useRef(null);
     const hourHandle = useRef(null);
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             let date = new Date();
             let ss = date.getSeconds();
             let mm = date.getMinutes();
@@ -16,18 +14,19 @@ function Clock() {
             minuteHandle.current.style.transform = `rotateZ(${mm * 6}deg)`;
             hourHandle.current.style.transform = `rotateZ(${hh * 30}deg)`;
         }, 1000);
+        return () => clearInterval(interval);
     }, []);
     return (
         <div>
-            <article class={isActive ? 'invisible' : 'clock'}>
-                <div class="hours-container">
-                    <div class="hours" ref={hourHandle}></div>
+            <article className="clock">
+                <div className="hours-container">
+                    <div className="hours" ref={hourHandle}></div>
                 </div>
-                <div class="minutes-container">
-                    <div class="minutes" ref={minuteHandle}></div>
+                <div className="minutes-container">
+                    <div className="minutes" ref={minuteHandle}></div>
                 </div>
-                <div class="seconds-container">
-                    <div class="seconds" ref={secondHandle}></div>
+                <div className="seconds-container">
+                    <div className="seconds" ref={secondHandle}></div>
                 </div>
             </article>
         </div>

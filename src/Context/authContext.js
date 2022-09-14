@@ -6,7 +6,6 @@ const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
     //Authentication
-    const [loading, setLoading] = useState(true);
     const [user, setUser] = useState({});
 
     const createUser = (email, password) => {
@@ -20,6 +19,16 @@ export const AuthContextProvider = ({ children }) => {
     const logout = () => {
         return signOut(auth);
     };
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+            console.log(user);
+        });
+        return () => {
+            unsubscribe();
+        };
+    }, [user]);
+
     //function enter to submit
     function useKey(key, cb) {
         const callbackRef = useRef(cb);
@@ -38,6 +47,7 @@ export const AuthContextProvider = ({ children }) => {
             return () => document.removeEventListener('keydown', handle);
         }, [key]);
     }
+
     //close when click outside
     function useOutsideClose(ref) {
         useEffect(() => {
@@ -52,21 +62,13 @@ export const AuthContextProvider = ({ children }) => {
             };
         }, [ref]);
     }
-    //toggle
-    const [isActive, setActive] = useState(false);
-    const toggleClass = () => {
-        setActive(!isActive);
-    };
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            setLoading(false);
-        });
-        return () => {
-            unsubscribe();
-        };
-    }, []);
+    //toggle
+    const [active, setActive] = useState(false);
+    function toggle() {
+        setActive(!active);
+    }
+
     const value = {
         createUser,
         user,
@@ -74,10 +76,10 @@ export const AuthContextProvider = ({ children }) => {
         login,
         useOutsideClose,
         useKey,
-        toggleClass,
-        isActive,
+        toggle,
+        active,
     };
-    return <UserContext.Provider value={value}>{!loading && children}</UserContext.Provider>;
+    return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 export const useAuth = () => {

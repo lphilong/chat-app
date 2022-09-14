@@ -1,14 +1,20 @@
-import Login from '../pages/Login';
-import Register from '../pages/Register';
+import Chat from '../pages/Chat';
+import Home from '../pages/Home';
+import Auth from '../pages/Auth';
 
 const publicRoutes = [
     {
         path: '/',
-        element: Login,
+        element: Home,
     },
     {
-        path: '/register',
-        element: Register,
+        path: '/auth',
+        element: Auth,
+    },
+
+    {
+        path: '/chat',
+        element: Chat,
     },
 ];
 
