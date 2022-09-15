@@ -18,7 +18,7 @@ const Message = ({ message }) => {
                 <img src={message.senderId === user.uid ? user.photoURL : data.user.photoURL} alt="" />
             </div>
             <div className="messageContent">
-                <p>{message.text}</p>
+                {message.text && <p>{message.text}</p>}
                 {message.img && <img src={message.img} alt="" />}
             </div>
         </div>

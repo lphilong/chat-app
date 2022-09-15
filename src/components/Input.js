@@ -6,6 +6,7 @@ import { db, storage } from '../firebase';
 import { v4 as uuid } from 'uuid';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { IoMdSend } from 'react-icons/io';
+import { ImImages } from 'react-icons/im';
 function Input() {
     const { user, useKey } = useAuth();
     const { data } = useChat();
@@ -64,16 +65,20 @@ function Input() {
         setImg(null);
     };
     const keyPress = useKey('Enter', handleSend);
-
+    const enabled = text.length !== 0 || img !== null ? 1 : 0;
     return (
         <div className="input">
-            <input required type="text" placeholder="Aa " onChange={(e) => setText(e.target.value)} value={text} />
-            <div className="send">
+            <div className="input__content">
+                <input required type="text" placeholder="Aa " onChange={(e) => setText(e.target.value)} value={text} />
                 <input type="file" style={{ display: 'none' }} id="file" onChange={(e) => setImg(e.target.files[0])} />
-                <label htmlFor="file"></label>
-                <div onKeyDown={keyPress} onClick={handleSend}>
+                <label htmlFor="file">
+                    <ImImages style={{ cursor: 'pointer' }} />
+                </label>
+            </div>
+            <div className="send">
+                <button disabled={!enabled} onKeyDown={keyPress} onClick={handleSend}>
                     <IoMdSend style={{ color: 'red', fontSize: '20px' }} />
-                </div>
+                </button>
             </div>
         </div>
     );
