@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../Context/authContext';
 import { useChat } from '../Context/chatContext';
 import { arrayUnion, doc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
@@ -12,6 +12,8 @@ function Input() {
     const { data } = useChat();
     const [text, setText] = useState('');
     const [img, setImg] = useState(null);
+    const [preview, setPreview] = useState();
+
     const handleSend = async () => {
         if (img) {
             const storageRef = ref(storage, uuid());
@@ -66,14 +68,32 @@ function Input() {
     };
     const keyPress = useKey('Enter', handleSend);
     const enabled = text.length !== 0 || img !== null ? 1 : 0;
+    useEffect(() => {
+        if (!img) {
+            setPreview(undefined);
+            return;
+        }
+
+        const objectUrl = URL.createObjectURL(img);
+        setPreview(objectUrl);
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [img]);
     return (
         <div className="input">
-            <div className="input__content">
+            <div className={`input__content ${img && 'justify'}`}>
                 <input required type="text" placeholder="Aa " onChange={(e) => setText(e.target.value)} value={text} />
                 <input type="file" style={{ display: 'none' }} id="file" onChange={(e) => setImg(e.target.files[0])} />
-                <label htmlFor="file">
-                    <ImImages style={{ cursor: 'pointer' }} />
-                </label>
+                {!img ? (
+                    <label htmlFor="file">
+                        <ImImages style={{ cursor: 'pointer', color: 'red' }} />
+                    </label>
+                ) : (
+                    <div style={{ marginBottom: '5px', width: '100%' }}>
+                        <img src={preview} alt="" style={{ width: '50px', height: '50px', borderRadius: '12px' }} />
+                    </div>
+                )}
             </div>
             <div className="send">
                 <button disabled={!enabled} onKeyDown={keyPress} onClick={handleSend}>

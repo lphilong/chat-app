@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../Context/authContext';
 import { RiImageAddFill } from 'react-icons/ri';
 import { db, storage } from '../firebase';
@@ -12,6 +12,7 @@ function Register() {
     const [displayName, setDisplayName] = useState();
     const [passwordConfirm, setPasswordConfirm] = useState();
     const [password, setPassword] = useState();
+    const [preview, setPreview] = useState();
     const [file, setFile] = useState('');
     const [loading, setLoading] = useState(false);
     const [err, setErr] = useState(false);
@@ -59,6 +60,19 @@ function Register() {
         }
     };
     const keyPress = useKey('Enter', handleSubmit);
+    // review avatar
+    useEffect(() => {
+        if (!file) {
+            setPreview(undefined);
+            return;
+        }
+
+        const objectUrl = URL.createObjectURL(file);
+        setPreview(objectUrl);
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [file]);
 
     return (
         <div className="container">
@@ -100,18 +114,24 @@ function Register() {
                                 style={{ display: 'none' }}
                                 onChange={(e) => setFile(e.target.files[0])}
                             />
-                            <label htmlFor="file">
-                                <RiImageAddFill
-                                    style={{
-                                        height: '40px',
-                                        width: '40px',
-                                        opacity: '0.7',
-                                        cursor: 'pointer',
-                                        marginRight: '10px',
-                                    }}
-                                />
-                                <span>Add an avatar</span>
-                            </label>
+                            {!file ? (
+                                <label htmlFor="file">
+                                    <RiImageAddFill
+                                        style={{
+                                            height: '40px',
+                                            width: '40px',
+                                            opacity: '0.7',
+                                            cursor: 'pointer',
+                                            marginRight: '10px',
+                                        }}
+                                    />
+                                    <span>Add an avatar</span>
+                                </label>
+                            ) : (
+                                <div style={{ marginBottom: '5px' }}>
+                                    <img src={preview} alt="Your Avatar" style={{ width: '50px', height: '50px' }} />
+                                </div>
+                            )}
                         </div>
 
                         <button className="button" onClick={handleSubmit} disabled={loading} type="submit">

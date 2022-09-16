@@ -1,6 +1,6 @@
-import Chat from '../pages/Chat';
 import Home from '../pages/Home';
 import Auth from '../pages/Auth';
+import TestPage from '../TestPage';
 
 const publicRoutes = [
     {
@@ -13,8 +13,8 @@ const publicRoutes = [
     },
 
     {
-        path: '/chat',
-        element: Chat,
+        path: '/test',
+        element: TestPage,
     },
 ];
 
