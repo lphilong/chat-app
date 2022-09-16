@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/lphilong/chat-app/static/css/main.7dc99812.css",
+    "main.js": "/lphilong/chat-app/static/js/main.559b4470.js",
+    "static/js/787.6f726199.chunk.js": "/lphilong/chat-app/static/js/787.6f726199.chunk.js",
+    "static/media/Double-Take-Violin-1-Hour-Kurt-Cover-Chill-Meme-Sound-Tik-Tok-Bn-Pht-Li-Mt-M-Hn.mp3": "/lphilong/chat-app/static/media/Double-Take-Violin-1-Hour-Kurt-Cover-Chill-Meme-Sound-Tik-Tok-Bn-Pht-Li-Mt-M-Hn.80f2850dc75c38b64bcd.mp3",
+    "static/media/background.jpg": "/lphilong/chat-app/static/media/background.9185d406e4f23ab7605a.jpg",
+    "static/media/1.png": "/lphilong/chat-app/static/media/1.9af927e30b6fe87b1025.png",
+    "static/media/clock2.png": "/lphilong/chat-app/static/media/clock2.fece385c91d46e41f4e9.png",
+    "index.html": "/lphilong/chat-app/index.html",
+    "main.7dc99812.css.map": "/lphilong/chat-app/static/css/main.7dc99812.css.map",
+    "main.559b4470.js.map": "/lphilong/chat-app/static/js/main.559b4470.js.map",
+    "787.6f726199.chunk.js.map": "/lphilong/chat-app/static/js/787.6f726199.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7dc99812.css",
+    "static/js/main.559b4470.js"
+  ]
+}
