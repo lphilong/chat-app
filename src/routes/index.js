@@ -1,6 +1,5 @@
 import Home from '../pages/Home';
 import Auth from '../pages/Auth';
-import TestPage from '../TestPage';
 
 const publicRoutes = [
     {
@@ -10,11 +9,6 @@ const publicRoutes = [
     {
         path: '/auth',
         element: Auth,
-    },
-
-    {
-        path: '/test',
-        element: TestPage,
     },
 ];
 
