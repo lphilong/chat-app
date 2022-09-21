@@ -5,6 +5,7 @@ import { db, storage } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc } from 'firebase/firestore';
 import { updateProfile } from 'firebase/auth';
+
 function Register() {
     const { createUser, useKey, toggle } = useAuth();
     const [email, setEmail] = useState();
@@ -21,7 +22,7 @@ function Register() {
         }
         try {
             const res = await createUser(email, password);
-            alert('Please wait 5 seconds');
+            alert('Reload the page after 5 seconds');
             //Create a unique image name
             const date = new Date().getTime();
             const storageRef = ref(storage, `${displayName + date}`);
@@ -41,7 +42,6 @@ function Register() {
                             email,
                             photoURL: downloadURL,
                         });
-
                         //create empty user chats on firestore
                         await setDoc(doc(db, 'userChats', res.user.uid), {});
                     } catch (err) {
