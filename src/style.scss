@@ -34,6 +34,11 @@ $black-text: #000;
         @content;
     }
 }
+.music {
+    @include mobile {
+        display: none;
+    }
+}
 .home {
     background: url('./images/background.jpg') no-repeat;
     height: 100vh;
@@ -193,6 +198,7 @@ $black-text: #000;
             border-right: 2px solid rgba(255, 255, 255, 0.2);
             @include mobile {
                 display: block;
+                height: 100vh;
                 &.hide {
                     display: none;
                 }
@@ -327,6 +333,7 @@ $black-text: #000;
                 &.show {
                     display: flex;
                     width: 100vw;
+                    height: 100vh;
                 }
             }
             .chatInfo {
@@ -385,6 +392,9 @@ $black-text: #000;
             .messages {
                 @include dark-theme($dark-theme);
                 padding: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
                 height: calc(100% - 160px);
                 overflow: auto;
                 flex: 1;
@@ -415,7 +425,6 @@ $black-text: #000;
                             padding: 10px 20px;
                             border-radius: 40px;
                             max-width: max-content;
-                            width: 400px;
                             color: $black-text;
                             overflow-wrap: break-word;
                         }
@@ -428,13 +437,13 @@ $black-text: #000;
                         flex-direction: row-reverse;
 
                         .messageContent {
-                            align-items: flex-end;
                             p {
-                                background-color: #8da4f1;
-                                color: white;
+                                background-color: white;
+                                padding: 10px 20px;
                                 border-radius: 40px;
+                                max-width: max-content;
+                                color: $black-text;
                                 overflow-wrap: break-word;
-                                width: 400px;
                             }
                         }
                     }

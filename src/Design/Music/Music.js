@@ -24,7 +24,7 @@ const Music = ({ url }) => {
     const [playing, toggle] = useAudio(url);
 
     return (
-        <div style={{ right: 0, top: 0, margin: '20px', position: 'fixed', zIndex: '2001' }}>
+        <div className="music" style={{ right: 0, top: 0, margin: '20px', position: 'fixed', zIndex: '2001' }}>
             <button
                 onClick={toggle}
                 style={{ border: 'none', fontSize: '30px', cursor: 'pointer', background: 'none' }}
