@@ -5,7 +5,6 @@ import { db, storage } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc } from 'firebase/firestore';
 import { updateProfile } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
 function Register() {
     const { createUser, useKey, toggle } = useAuth();
     const [email, setEmail] = useState();
@@ -16,14 +15,13 @@ function Register() {
     const [file, setFile] = useState('');
     const [loading, setLoading] = useState(false);
     const [err, setErr] = useState(false);
-    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         if (password !== passwordConfirm) {
             return alert('Passwords do not match');
         }
         try {
             const res = await createUser(email, password);
-            alert('register success');
+            alert('Please wait 5 seconds');
             //Create a unique image name
             const date = new Date().getTime();
             const storageRef = ref(storage, `${displayName + date}`);
@@ -46,7 +44,6 @@ function Register() {
 
                         //create empty user chats on firestore
                         await setDoc(doc(db, 'userChats', res.user.uid), {});
-                        navigate('/auth');
                     } catch (err) {
                         console.log(err);
                         setErr(true);

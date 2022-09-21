@@ -7,7 +7,7 @@ function Home() {
     const navigate = useNavigate();
     const handleSubmit = () => navigate('/auth');
     return (
-        <div>
+        <div className="s">
             <div className="home">
                 <button type="submit" onClick={handleSubmit} className="decoration">
                     Chat App
