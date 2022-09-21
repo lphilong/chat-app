@@ -68,7 +68,9 @@ export const AuthContextProvider = ({ children }) => {
     function toggle() {
         setActive(!active);
     }
-
+    function toggleMobile() {
+        setActive(!active);
+    }
     const value = {
         createUser,
         user,
@@ -76,6 +78,7 @@ export const AuthContextProvider = ({ children }) => {
         login,
         useOutsideClose,
         useKey,
+        toggleMobile,
         toggle,
         active,
     };

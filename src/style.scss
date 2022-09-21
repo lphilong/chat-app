@@ -3,13 +3,22 @@
     padding: unset;
     box-sizing: border-box;
 }
+$primary-color: rgb(132, 58, 241);
+$dark-theme: rgb(36, 37, 38);
+$white-text: white;
+$input-primary-color: rgb(58, 59, 60);
+$light-theme: white;
+$black-text: #000;
 
-:root {
-    --primary-color: rgb(132, 58, 241);
-    --dark-theme: rgb(36, 37, 38);
-    --white-text: white;
-    --input-primary-color: rgb(58, 59, 60);
+@mixin light-theme($light-theme) {
+    background: $light-theme;
+    color: $black-text;
 }
+@mixin dark-theme($dark-theme: rgb(36, 37, 38)) {
+    background: $dark-theme;
+    color: $white-text;
+}
+
 @mixin mobile {
     @media screen and (max-width: 480px) {
         @content;
@@ -32,23 +41,36 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @include mobile {
+        flex-direction: column;
+        width: 100vw;
+        background: lightskyblue;
+    }
     .decoration {
         border: none;
         width: 100px;
         background: linear-gradient(to right, rgb(101, 103, 242), rgb(118, 44, 240));
         height: 35px;
         border-radius: 5px;
-        color: white;
+        color: $white-text;
         transform: translate(200px, -300px);
         z-index: 1;
         animation: roll-in-left ease 3s;
+        @include mobile {
+            transform: none;
+            margin-bottom: 20px;
+        }
     }
     .decoration:hover {
         cursor: pointer;
         background: linear-gradient(to right, rgb(88, 90, 246), rgb(108, 21, 249));
     }
+
     .visible {
         display: block;
+        @include mobile {
+            width: 100vw;
+        }
     }
     .invisible {
         display: none;
@@ -57,6 +79,9 @@
         z-index: 2000;
         display: flex;
         animation: scale-in-center ease 2s;
+        @include mobile {
+            justify-content: center;
+        }
         .left {
             background-color: white;
             padding: 45px;
@@ -67,7 +92,7 @@
                     margin-bottom: 15px;
                     span {
                         font-size: 24px;
-                        color: var(--primary-color);
+                        color: $primary-color;
                     }
                 }
                 .form__mid {
@@ -78,10 +103,10 @@
                             margin: 10px 0;
                             padding: 10px;
                             border-radius: 5px;
-                            border: 1px solid var(--primary-color);
+                            border: 1px solid $primary-color;
                         }
                         input:focus {
-                            outline-color: var(--primary-color);
+                            outline-color: $primary-color;
                         }
                         label {
                             display: flex;
@@ -97,7 +122,7 @@
                         align-items: center;
                         justify-content: space-between;
                         span {
-                            color: var(--primary-color);
+                            color: $primary-color;
                             font-size: 14px;
                         }
                     }
@@ -107,7 +132,7 @@
                         background: linear-gradient(to right, rgb(101, 103, 242), rgb(118, 44, 240));
                         height: 35px;
                         border-radius: 5px;
-                        color: white;
+                        color: $white-text;
                     }
                     .button:hover {
                         background: linear-gradient(to right, rgb(88, 90, 246), rgb(108, 21, 249));
@@ -127,7 +152,7 @@
                     .navigate__btn {
                         border: none;
                         font-size: 16px;
-                        color: var(--primary-color);
+                        color: $primary-color;
                         background: white;
                         padding-top: 5px;
                         margin-left: 10px;
@@ -140,6 +165,9 @@
             }
         }
         .right {
+            @include mobile {
+                display: none;
+            }
             .img {
                 background: url('./images/1.png') no-repeat;
                 height: 600px;
@@ -154,14 +182,21 @@
         height: 80%;
         justify-content: center;
         border: 2px solid rgba(255, 255, 255, 0.2);
-
+        @include mobile {
+            width: 100vw;
+        }
         //animation: scale-in-center ease 3s;
         .sidebar {
             flex: 1;
-            background: var(--dark-theme);
+            @include dark-theme($dark-theme);
             border: 2px solid rgba(5, 5, 5, 0.2);
             border-right: 2px solid rgba(255, 255, 255, 0.2);
-
+            @include mobile {
+                display: block;
+                &.hide {
+                    display: none;
+                }
+            }
             .nav {
                 display: flex;
                 justify-content: space-between;
@@ -171,7 +206,7 @@
                 position: relative;
                 border: 2px solid rgba(5, 5, 5, 0.2);
                 span {
-                    color: var(--white-text);
+                    color: $white-text;
                     font-size: 25px;
                 }
                 .user {
@@ -210,9 +245,9 @@
                         border-radius: 15px;
                         padding: 8px;
                         width: 80%;
-                        background: var(--input-primary-color);
-                        border: 1px solid var(--input-primary-color);
-                        color: var(--white-text);
+                        background: $input-primary-color;
+                        border: 1px solid $input-primary-color;
+                        color: $white-text;
                     }
                 }
                 .userChat {
@@ -220,10 +255,10 @@
                     display: flex;
                     align-items: center;
                     gap: 10px;
-                    color: white;
+                    color: $white-text;
                     cursor: pointer;
                     &:hover {
-                        background-color: var(--primary-color);
+                        background-color: $primary-color;
                     }
 
                     img {
@@ -237,7 +272,7 @@
                         span {
                             font-size: 18px;
                             font-weight: 500;
-                            color: #000;
+                            color: $black-text;
                         }
                         p {
                             font-size: 14px;
@@ -253,10 +288,10 @@
                     display: flex;
                     align-items: center;
                     gap: 10px;
-                    color: white;
+                    color: $white-text;
                     cursor: pointer;
                     &:hover {
-                        background-color: var(--primary-color);
+                        background-color: $primary-color;
                     }
                     img {
                         width: 50px;
@@ -269,7 +304,7 @@
                     span {
                         font-size: 18px;
                         font-weight: 500;
-                        color: var(--white-text);
+                        color: $white-text;
                     }
                     p {
                         font-size: 14px;
@@ -284,15 +319,27 @@
         }
         .chatBox {
             flex: 2;
-            background: var(--dark-theme);
+            @include dark-theme($dark-theme);
             display: flex;
             flex-direction: column;
+            @include mobile {
+                display: none;
+                &.show {
+                    display: flex;
+                    width: 100vw;
+                }
+            }
             .chatInfo {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 border: 2px solid rgba(5, 5, 5, 0.2);
-
+                .back__btn {
+                    display: none;
+                    @include mobile {
+                        display: block;
+                    }
+                }
                 .userInfo {
                     &:hover {
                         background: grey;
@@ -303,7 +350,7 @@
                     margin: 5px;
                     border-radius: 4px;
                     span {
-                        color: white;
+                        color: $white-text;
                     }
                     img {
                         width: 40px;
@@ -326,7 +373,7 @@
                         width: 30px;
                         margin: 10px;
                         font-size: 25px;
-                        color: var(--primary-color);
+                        color: $primary-color;
                         &:hover {
                             background: grey;
                             border-radius: 50%;
@@ -336,7 +383,7 @@
                 }
             }
             .messages {
-                background-color: var(--dark-theme);
+                @include dark-theme($dark-theme);
                 padding: 10px;
                 height: calc(100% - 160px);
                 overflow: auto;
@@ -357,9 +404,6 @@
                             border-radius: 50%;
                             object-fit: cover;
                         }
-                        span {
-                            color: var(--white-text);
-                        }
                     }
                     .messageContent {
                         max-width: 80%;
@@ -372,6 +416,7 @@
                             border-radius: 40px;
                             max-width: max-content;
                             width: 400px;
+                            color: $black-text;
                             overflow-wrap: break-word;
                         }
 
@@ -400,11 +445,11 @@
                 justify-content: center;
                 align-items: center;
                 padding: 10px 0;
-                background: var(--dark-theme);
+                @include dark-theme($dark-theme);
                 .input__content {
                     display: flex;
                     align-items: center;
-                    background: rgb(58, 59, 60);
+                    background: $input-primary-color;
                     width: 80%;
                     padding: 2px 10px;
                     border-radius: 15px;
@@ -412,9 +457,9 @@
                     input {
                         width: 100%;
                         height: 26px;
-                        background: rgb(58, 59, 60);
+                        background: $input-primary-color;
                         border: none;
-                        color: var(--white-text);
+                        color: $white-text;
                         &:focus {
                             border: none;
                             outline: none;

@@ -1,14 +1,36 @@
+@mixin mobile {
+    @media screen and (max-width: 480px) {
+        @content;
+    }
+}
+@mixin tablet {
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
+@mixin laptop {
+    @media screen and (max-width: 1200px) {
+        @content;
+    }
+}
+$primary-color: rgb(132, 58, 241);
+
 .clock {
     border-radius: 50%;
     background: url('../../images/clock2.png') no-repeat center;
     background-size: 107%;
-    height: 25em;
+    height: 23em;
     padding-bottom: 38%;
     opacity: 0.4;
     transform: translate(-51px, -19px);
     position: relative;
-    width: 25em;
-
+    width: 23em;
+    @include mobile {
+        height: 10em;
+        width: 10em;
+        transform: none;
+        opacity: 0.7;
+    }
     .minutes-container,
     .hours-container,
     .seconds-container {
@@ -20,7 +42,7 @@
     }
     .hours-container {
         .hours {
-            background: var(--primary-color);
+            background: $primary-color;
             height: 20%;
             left: 48.75%;
             position: absolute;
