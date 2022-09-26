@@ -5,8 +5,10 @@ import { db, storage } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc } from 'firebase/firestore';
 import { updateProfile } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
+    const navigate = useNavigate();
     const { createUser, useKey, toggle } = useAuth();
     const [email, setEmail] = useState();
     const [displayName, setDisplayName] = useState();
@@ -22,7 +24,9 @@ function Register() {
         }
         try {
             const res = await createUser(email, password);
-            alert('Reload the page after 5 seconds');
+            alert('register success');
+            navigate('/');
+
             //Create a unique image name
             const date = new Date().getTime();
             const storageRef = ref(storage, `${displayName + date}`);
@@ -30,7 +34,7 @@ function Register() {
             await uploadBytesResumable(storageRef, file).then(() => {
                 getDownloadURL(storageRef).then(async (downloadURL) => {
                     try {
-                        //Update <profile></profile>
+                        //Update <profile>
                         await updateProfile(res.user, {
                             displayName,
                             photoURL: downloadURL,
@@ -57,6 +61,7 @@ function Register() {
         }
     };
     const keyPress = useKey('Enter', handleSubmit);
+
     // review avatar
     useEffect(() => {
         if (!file) {
@@ -135,6 +140,7 @@ function Register() {
                             Sign Up
                         </button>
                         {err && <span>Something went wrong</span>}
+                        {loading && <span>Loading...</span>}
                     </div>
                     <div className="form__footer">
                         <div
