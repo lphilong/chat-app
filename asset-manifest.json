@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/chat-app/static/css/main.bc98373f.css",
-    "main.js": "/chat-app/static/js/main.dc0b6736.js",
+    "main.js": "/chat-app/static/js/main.228301e0.js",
     "static/js/787.6f726199.chunk.js": "/chat-app/static/js/787.6f726199.chunk.js",
     "static/media/Double-Take-Violin-1-Hour-Kurt-Cover-Chill-Meme-Sound-Tik-Tok-Bn-Pht-Li-Mt-M-Hn.mp3": "/chat-app/static/media/Double-Take-Violin-1-Hour-Kurt-Cover-Chill-Meme-Sound-Tik-Tok-Bn-Pht-Li-Mt-M-Hn.80f2850dc75c38b64bcd.mp3",
     "static/media/background.jpg": "/chat-app/static/media/background.9185d406e4f23ab7605a.jpg",
@@ -9,11 +9,11 @@
     "static/media/clock2.png": "/chat-app/static/media/clock2.fece385c91d46e41f4e9.png",
     "index.html": "/chat-app/index.html",
     "main.bc98373f.css.map": "/chat-app/static/css/main.bc98373f.css.map",
-    "main.dc0b6736.js.map": "/chat-app/static/js/main.dc0b6736.js.map",
+    "main.228301e0.js.map": "/chat-app/static/js/main.228301e0.js.map",
     "787.6f726199.chunk.js.map": "/chat-app/static/js/787.6f726199.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bc98373f.css",
-    "static/js/main.dc0b6736.js"
+    "static/js/main.228301e0.js"
   ]
 }
