@@ -23,10 +23,8 @@ function Register() {
             return alert('Passwords do not match');
         }
         try {
+            setLoading(true);
             const res = await createUser(email, password);
-            alert('register success');
-            navigate('/');
-
             //Create a unique image name
             const date = new Date().getTime();
             const storageRef = ref(storage, `${displayName + date}`);
@@ -52,6 +50,9 @@ function Register() {
                         console.log(err);
                         setErr(true);
                         setLoading(false);
+                    } finally {
+                        setLoading(false);
+                        navigate('/chat');
                     }
                 });
             });
@@ -75,6 +76,10 @@ function Register() {
         // free memory when ever this component is unmounted
         return () => URL.revokeObjectURL(objectUrl);
     }, [file]);
+
+    if (loading) {
+        return <span>Loading...</span>;
+    }
 
     return (
         <div className="container">
@@ -140,7 +145,6 @@ function Register() {
                             Sign Up
                         </button>
                         {err && <span>Something went wrong</span>}
-                        {loading && <span>Loading...</span>}
                     </div>
                     <div className="form__footer">
                         <div

@@ -1,5 +1,6 @@
 import Home from '../pages/Home';
 import Auth from '../pages/Auth';
+import Chat from '../pages/Chat';
 
 const publicRoutes = [
     {
@@ -9,6 +10,10 @@ const publicRoutes = [
     {
         path: '/auth',
         element: Auth,
+    },
+    {
+        path: '/chat',
+        element: Chat,
     },
 ];
 

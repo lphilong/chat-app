@@ -1,11 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Context/authContext';
 import Clock from '../Design/Clock/Clock';
 import StarFall from '../Design/StarFall/StarFall';
 
 function Home() {
+    const { user } = useAuth();
     const navigate = useNavigate();
-    const handleSubmit = () => navigate('/auth');
+    const handleSubmit = () => (user ? navigate('/chat') : navigate('/auth'));
     return (
         <div className="s">
             <div className="home">

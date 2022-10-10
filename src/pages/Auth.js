@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuth } from '../Context/authContext';
 import Login from '../components/Login';
 import Register from '../components/Register';
-import Chat from './Chat';
+import { Navigate } from 'react-router-dom';
 function Auth() {
     const { active, user } = useAuth();
     return (
@@ -17,7 +17,7 @@ function Auth() {
                     </div>
                 </>
             ) : (
-                <Chat />
+                <Navigate replace to="/" />
             )}
         </div>
     );

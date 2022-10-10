@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillFacebook } from 'react-icons/ai';
 import { useAuth } from '../Context/authContext';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const { login, useKey, toggle } = useAuth();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [loading, setLoading] = useState(false);
-
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -17,8 +18,10 @@ function Login() {
             alert('login success');
         } catch (e) {
             alert('Your email or password is not correct!');
+        } finally {
+            setLoading(false);
+            navigate('/chat');
         }
-        setLoading(false);
     };
     const keyPress = useKey('Enter', handleSubmit);
 
@@ -55,6 +58,7 @@ function Login() {
                         <button className="button" onClick={handleSubmit} disabled={loading} type="submit">
                             Login
                         </button>
+                        {loading && <span>Loading...</span>}
                     </div>
                     <div>
                         <hr style={{ borderTop: '2px dashed rgb(132, 58, 241)', marginTop: '1.25rem' }} />
